@@ -23,6 +23,7 @@ lazy val document = project
   .disablePlugins(RevolverPlugin)
   .settings(commonSettings, packagingSettings, publishSettings, ghPagesSettings, wixSettings)
   .settings(
+    crossScalaVersions := supportedScalaVersions,
     unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(noDocProjects: _*),
     libraryDependencies ++= Seq(),
     ThisBuild / turbo := true,
