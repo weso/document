@@ -31,7 +31,6 @@ lazy val document = project
     cancelable in Global      := true,
     fork                      := true,
   //  parallelExecution in Test := false,
-    crossScalaVersions := Nil,
     publish / skip := true
   )
 
