@@ -5,6 +5,11 @@ A basic pretty-printing library, based on Lindig's strict version of Wadler's ad
 
 [![Build Status](https://travis-ci.org/weso/document.svg?branch=master)](https://travis-ci.org/weso/document)
 
+## Further info
+
+* [The design of a pretty-printing library](http://www.cse.chalmers.se/~rjmh/Papers/pretty.html) by John Hughes, describes the original pretty-printing library in Haskell, [PDF](http://belle.sourceforge.net/doc/hughes95design.pdf)
+* [Strictly Pretty Paper](https://lindig.github.io/papers/strictly-pretty-2000.pdf) by Christian Lindig, describes a strict implementation of the pretty printing algorithm in OCaml
+
 ## Contribution
 
 Contributions are greatly appreciated.
