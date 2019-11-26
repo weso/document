@@ -73,4 +73,36 @@ class DocumentTest extends FunSpec with Matchers {
       w.toString should (be("a\nb"))
     }
   }
+
+  describe("Other tests") {
+    it("Create an empty text document") {
+      val w: StringWriter = new StringWriter
+      Document.empty.format(1,w)
+      w.toString should be("")
+    }
+
+    it("Create a break document") {
+      val w: StringWriter = new StringWriter
+      Document.break.format(1,w)
+      w.toString should be(" ")
+    }
+
+    it("Create a text document from a string") {
+      val w: StringWriter = new StringWriter
+      Document.text("a").format(1,w)
+      w.toString should be("a")
+    }
+
+    it("Create a document group from a single doc") {
+      val w: StringWriter = new StringWriter
+      Document.group(DocText("a")).format(1,w)
+      w.toString should be("a")
+    }
+
+    it("Create a document nest from a single doc") {
+      val w: StringWriter = new StringWriter
+      Document.nest(1, DocText("a")).format(1,w)
+      w.toString should be("a")
+    }
+  }
 }
