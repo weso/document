@@ -13,17 +13,21 @@ case class DocCons(hd: Document, tl: Document) extends Document
   * A basic pretty-printing library, based on Lindig's strict version
   * of Wadler's adaptation of Hughes' pretty-printer.
   *
-  * derived from [[https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala]]
+  * Derived from [[https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala]]
   * @author Michel Schinz
-  *
-  * Labra: I embedded the library doing the same as json4s did: https://github.com/json4s/json4s/issues/199
-  * You can see the reasons there.
-  *
   */
 sealed abstract class Document extends Product with Serializable {
+
+  /*Join two documents.*/
   def ::(hd: Document): Document = DocCons(hd, this)
+
+  /*Join a document and a String.*/
   def ::(hd: String): Document = DocCons(DocText(hd), this)
+
+  /*Join two documents with a line break.*/
   def :/:(hd: Document): Document = hd :: DocBreak :: this
+
+  /*Join a document and a String with a line break.*/
   def :/:(hd: String): Document = hd :: DocBreak :: this
 
   /**
@@ -31,27 +35,37 @@ sealed abstract class Document extends Product with Serializable {
     * breaks so that the result fits in `width` columns.
     */
   def format(width: Int, writer: Writer): Unit = {
+
     type FmtState = (Int, Boolean, Document)
 
-    def fits(w: Int, state: List[FmtState]): Boolean = state match {
-      case _ if w < 0 =>
+    def fits(width: Int, state: List[FmtState]): Boolean = state match {
+
+      case _ if width < 0 =>
         false
+
       case List() =>
         true
+
       case (_, _, DocNil) :: z =>
-        fits(w, z)
+        fits(width, z)
+
       case (i, b, DocCons(h, t)) :: z =>
-        fits(w, (i,b,h) :: (i,b,t) :: z)
+        fits(width, (i,b,h) :: (i,b,t) :: z)
+
       case (_, _, DocText(t)) :: z =>
-        fits(w - t.length(), z)
+        fits(width - t.length(), z)
+
       case (i, b, DocNest(ii, d)) :: z =>
-        fits(w, (i + ii, b, d) :: z)
+        fits(width, (i + ii, b, d) :: z)
+
       case (_, false, DocBreak) :: z =>
-        fits(w - 1, z)
+        fits(width - 1, z)
+
       case (_, true, DocBreak) :: z =>
         true
+
       case (i, _, DocGroup(d)) :: z =>
-        fits(w, (i, false, d) :: z)
+        fits(width, (i, false, d) :: z)
     }
 
     def spaces(n: Int): Unit = {
@@ -64,26 +78,35 @@ sealed abstract class Document extends Product with Serializable {
     }
 
     def fmt(k: Int, state: List[FmtState]): Unit = state match {
+
       case List() => ()
+
       case (_, _, DocNil) :: z =>
         fmt(k, z)
+
       case (i, b, DocCons(h, t)) :: z =>
         fmt(k, (i, b, h) :: (i, b, t) :: z)
+
       case (i, _, DocText(t)) :: z =>
         writer write t
         fmt(k + t.length(), z)
+
       case (i, b, DocNest(ii, d)) :: z =>
         fmt(k, (i + ii, b, d) :: z)
+
       case (i, true, DocBreak) :: z =>
         writer write "\n"
         spaces(i)
         fmt(i, z)
+
       case (i, false, DocBreak) :: z =>
         writer write " "
         fmt(k + 1, z)
+
       case (i, b, DocGroup(d)) :: z =>
         val fitsFlat = fits(width - k, (i, false, d) :: z)
         fmt(k, (i, !fitsFlat, d) :: z)
+
       case _ =>
         ()
     }
@@ -93,6 +116,7 @@ sealed abstract class Document extends Product with Serializable {
 }
 
 object Document {
+
   /** The empty document */
   def empty: Document = DocNil
 
@@ -103,7 +127,7 @@ object Document {
   def text(s: String): Document = DocText(s)
 
   /**
-    * A group, whose components will either be printed with all breaks
+    * A group of documents, whose components will either be printed with all breaks
     * rendered as spaces, or with all breaks rendered as line breaks.
     */
   def group(d: Document): Document = DocGroup(d)
