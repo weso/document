@@ -1,4 +1,4 @@
-name: test openJDK-12 scala-2.13.1
+name: test openJDK-12 Scala-2.13.1
 
 on: [push]
 
