@@ -15,4 +15,4 @@ jobs:
         version: 12
         architecture: x64
     - name: Run tests
-      run: sbt ++2.13.1 test
+      run: sbt ++2.13.1! test
