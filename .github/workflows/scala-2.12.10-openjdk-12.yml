@@ -1,4 +1,4 @@
-name: Scala-2.12.10 CI
+name: test openJDK-12 Scala-2.12.10
 
 on: [push]
 
