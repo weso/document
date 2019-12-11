@@ -1,8 +1,10 @@
 package es.weso.document
 import org.scalatest._
 import java.io.StringWriter
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
 
-class DocumentTest extends FunSpec with Matchers {
+class DocumentTest extends AnyFunSpec with Matchers {
 
   describe(s"Document") {
     it(s"Combine 2 null documents same line") {
