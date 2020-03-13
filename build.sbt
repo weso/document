@@ -3,8 +3,9 @@ lazy val scala213 = "2.13.1"
 // lazy val scalaJs  = "0.6.31"
 lazy val supportedScalaVersions = List(scala212, scala213) // ,scalaJs)
 
-lazy val scalacticVersion        = "3.0.8"
-lazy val scalaTestVersion        = "3.0.8"
+lazy val scalacticVersion        = "3.1.0"
+lazy val scalaTestVersion        = "3.1.0"
+
 lazy val scalacheckVersion       = "1.14.0"
 
 lazy val scalactic         = "org.scalactic"              %% "scalactic"           % scalacticVersion

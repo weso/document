@@ -1,0 +1,18 @@
+name: test openJDK-12 Scala-2.13.1
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: curl -O "https://download.java.net/java/GA/jdk12/33/GPL/openjdk-12_windows-x64_bin.zip"
+    - name: Set up openjdk12
+      uses: actions/setup-java@v1
+      with:
+        version: 12
+        architecture: x64
+    - name: Run tests
+      run: sbt ++2.13.1! test
