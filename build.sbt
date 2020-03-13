@@ -1,6 +1,7 @@
 lazy val scala212 = "2.12.10"
 lazy val scala213 = "2.13.1"
-lazy val supportedScalaVersions = List(scala212, scala213)
+// lazy val scalaJs  = "0.6.31"
+lazy val supportedScalaVersions = List(scala212, scala213) // ,scalaJs)
 
 lazy val scalacticVersion        = "3.0.8"
 lazy val scalaTestVersion        = "3.0.8"
@@ -27,11 +28,14 @@ lazy val document = project
     unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(noDocProjects: _*),
     libraryDependencies ++= Seq(),
     ThisBuild / turbo := true,
-    ThisBuild / scalaVersion := scala212,
+//    ThisBuild / scalaVersion := scala212,
     cancelable in Global      := true,
-    fork                      := true,
-  //  parallelExecution in Test := false,
-    publish / skip := true
+    fork                      := true, 
+    coverageHighlighting := true, 
+  //  coverageEnabled := { 
+  //   println(s"CoverageEnabled: ${coverageEnabled.value}, <2.13?: ${priorTo2_13(scalaVersion.value)}")
+  //   coverageEnabled.value && priorTo2_13(scalaVersion.value) 
+  //  }
   )
 
 
@@ -117,11 +121,7 @@ lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
     Resolver.bintrayRepo("weso", "weso-releases"),
     Resolver.sonatypeRepo("snapshots")
   ), 
-  coverageHighlighting := true, 
-  coverageEnabled := { 
-    println(s"CoverageEnabled: ${coverageEnabled.value}, ${priorTo2_13(scalaVersion.value)}")
-    priorTo2_13(scalaVersion.value) 
-  }
+  
 )
 
 lazy val publishSettings = Seq(
@@ -138,8 +138,10 @@ lazy val publishSettings = Seq(
                          <url>https://weso.labra.es</url>
                        </developer>
                      </developers>,
+  javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),                     
   scalacOptions in doc ++= Seq(
     "-diagrams-debug",
+    "-target:jvm-1.8",
     "-doc-source-url",
     scmInfo.value.get.browseUrl + "/tree/master€{FILE_PATH}.scala",
     "-sourcepath",
