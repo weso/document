@@ -1,0 +1,5 @@
+= Document library 
+
+== ScalaDoc
+
+link:latest/api/index.html[ScalaDoc]
