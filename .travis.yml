@@ -38,8 +38,6 @@ install:
 
 script:
 #  - sbt clean coverage test 
-  - echo "SBT_CROSSVERSION=$SBT_CROSS_VERSION"
-  - echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
   - if [[ "$TRAVIS_SCALA_VERSION" == 2.12.* ]];
     then
       sbt ++$TRAVIS_SCALA_VERSION  clean coverage test coverageReport && bash <(curl -s https://codecov.io/bash);
@@ -54,7 +52,6 @@ jdk:
 deploy:
   provider: script
   script: sbt ghpagesPushSite
-  skip_cleanup: true
   on:
     tags: true
-    condition: $TRAVIS_PULL_REQUEST = false && $SBT_CROSS_VERSION = 1.1*  
+    condition: $TRAVIS_PULL_REQUEST = false 
