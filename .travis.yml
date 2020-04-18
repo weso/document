@@ -38,6 +38,8 @@ install:
 
 script:
 #  - sbt clean coverage test 
+  - echo "SBT_CROSSVERSION=$SBT_CROSS_VERSION"
+  - echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
   - if [[ "$TRAVIS_SCALA_VERSION" == 2.12.* ]];
     then
       sbt ++$TRAVIS_SCALA_VERSION  clean coverage test coverageReport && bash <(curl -s https://codecov.io/bash);
