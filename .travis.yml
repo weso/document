@@ -17,11 +17,11 @@ before_deploy:
   - git config --global user.name "$USER"
   - git config --global user.email "$TRAVIS_BUILD_NUMBER@$TRAVIS_COMMIT"
   # Decrypt the secret deploy key using instructions from `travis encrypt-file`
-  - openssl aes-256-cbc -K $encrypted_3afbfedfa397_key -iv $encrypted_3afbfedfa397_iv -in project/travis-deploy-key.enc -out project/travis-deploy-key -d
-  - chmod 600 project/travis-deploy-key
+  #- openssl aes-256-cbc -K $encrypted_3afbfedfa397_key -iv $encrypted_3afbfedfa397_iv -in project/travis-deploy-key.enc -out project/travis-deploy-key -d
+  #- chmod 600 project/travis-deploy-key
   # Start ssh-agent in the background and load the deploy key
-  - eval "$(ssh-agent -s)"
-  - ssh-add project/travis-deploy-key  
+  #- eval "$(ssh-agent -s)"
+  #- ssh-add project/travis-deploy-key  
 
 cache:
   directories:
@@ -35,6 +35,7 @@ install:
   - gem update --system
   - gem install sass
   - gem install jekyll -v 3.8.5  
+  - gem install asciidoctor
 
 script:
 #  - sbt clean coverage test 
@@ -42,7 +43,7 @@ script:
     then
       sbt ++$TRAVIS_SCALA_VERSION  clean coverage test coverageReport && bash <(curl -s https://codecov.io/bash);
     else 
-      sbt ++$TRAVIS_SCALA_VERSION  clean test && echo "Skipping code coverage reporting and docs on 2.13";
+      sbt ++$TRAVIS_SCALA_VERSION  clean test makeSite && echo "Skipping code coverage reporting and docs on 2.13";
     fi  
 
 jdk:
@@ -50,8 +51,11 @@ jdk:
   - openjdk12
 
 deploy:
-  provider: script
-  script: sbt ghpagesPushSite
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: target/site
   on:
-    tags: true
-    condition: $TRAVIS_PULL_REQUEST = false 
+    branch: master
+    condition: $TRAVIS_SCALA_VERSION = 2.13.1 
