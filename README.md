@@ -1,7 +1,9 @@
 # document
 
 This project contains code that was developed as part of the Scala standard library but was later deprecated
-A basic pretty-printing library, based on Lindig's strict version of Wadler's adaptation of Hughes' pretty-printer derived from [Document.scala](https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala) whose author was Michel Schinz
+A basic pretty-printing library, based on Lindig's strict version of Wadler's adaptation of Hughes' pretty-printer derived from [Document.scala](https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala) whose author was Michel Schinz.
+
+You can see the [web page](https://weso.github.io/document) for technical documentation.
 
 |CI|Status|
 |:---|:---|
