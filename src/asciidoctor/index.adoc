@@ -1,5 +1,16 @@
 = Document library 
 
+This project contains code that was developed as part of the Scala standard library but was later deprecated.
+
+A basic pretty-printing library, based on 
+https://lindig.github.io/papers/strictly-pretty-2000.pdf[Lindig's strict version] of 
+https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf[Wadler's adaptation] of 
+http://www.cse.chalmers.se/~rjmh/Papers/pretty.html[Hughes' pretty-printer] derived from 
+https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala[Document.scala] whose original author was 
+https://people.epfl.ch/michel.schinz[Michel Schinz]
+
+We maintain it because we had some code using it and because we want an experimental simple Scala code library to test documentation.
+
 == ScalaDoc
 
-link:latest/api/index.html[ScalaDoc]
+link:latest/api/es/weso/document/Document.html[ScalaDoc]
