@@ -1,3 +1,5 @@
+addSbtPlugin("com.codecommit"    % "sbt-github-actions"  % "0.10.1")
+addSbtPlugin("com.codecommit"    % "sbt-github-packages" % "0.5.2")
 addSbtPlugin("com.47deg"         % "sbt-microsites"      % "1.1.5")
 addSbtPlugin("com.eed3si9n"      % "sbt-unidoc"          % "0.4.2")
 addSbtPlugin("com.eed3si9n"      % "sbt-assembly"        % "0.14.10")

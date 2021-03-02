@@ -1,10 +1,10 @@
-lazy val scala212 = "2.12.11"
-lazy val scala213 = "2.13.1"
+lazy val scala212 = "2.12.13"
+lazy val scala213 = "2.13.5"
 lazy val scalaJs  = "0.6.31"
 lazy val supportedScalaVersions = List(scala212, scala213, scalaJs)
 
-lazy val scalacticVersion        = "3.1.1"
-lazy val scalaTestVersion        = "3.1.1"
+lazy val scalacticVersion        = "3.2.5"
+lazy val scalaTestVersion        = "3.2.5"
 
 lazy val scalacheckVersion       = "1.14.0"
 
@@ -32,6 +32,8 @@ lazy val document = project
     cancelable in Global      := true,
     fork                      := true, 
     coverageHighlighting := true, 
+    githubOwner := "weso", 
+    githubRepository := "document"
   //  coverageEnabled := { 
   //   println(s"CoverageEnabled: ${coverageEnabled.value}, <2.13?: ${priorTo2_13(scalaVersion.value)}")
   //   coverageEnabled.value && priorTo2_13(scalaVersion.value) 
