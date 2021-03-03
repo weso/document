@@ -1,5 +1,4 @@
 package es.weso.document
-import org.scalatest._
 import java.io.StringWriter
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
