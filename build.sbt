@@ -2,7 +2,11 @@ lazy val scala212 = "2.12.13"
 lazy val scala213 = "2.13.5"
 lazy val scalaJs  = "0.6.31"
 lazy val scala3   = "3.0.0-M2"
-lazy val supportedScalaVersions = List(scala212, scala213,scala3)
+lazy val supportedScalaVersions = List(
+  scala212, 
+  scala213,
+//  scala3
+  )
 
 lazy val munitVersion = "0.7.20"
 
@@ -77,11 +81,6 @@ lazy val compilationSettings = Seq(
   // format: on
 )
 
-lazy val wixSettings = Seq(
-  wixProductId        := "39b564d5-d381-4282-ada9-87244c76e14b",
-  wixProductUpgradeId := "6a710435-9af4-4adb-a597-98d3dd0bade1"
-)
-
 lazy val ghPagesSettings = Seq(
   git.remoteRepo := "git@github.com:weso/document.git"
 )
@@ -89,15 +88,16 @@ lazy val ghPagesSettings = Seq(
 lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
   organization := "es.weso",
   resolvers ++= Seq(
-    Resolver.bintrayRepo("labra", "maven"),
-    Resolver.bintrayRepo("weso", "weso-releases"),
-    Resolver.sonatypeRepo("snapshots")
+//    Resolver.bintrayRepo("labra", "maven"),
+//    Resolver.bintrayRepo("weso", "weso-releases"),
+//    Resolver.sonatypeRepo("snapshots")
+    Resolver.githubPackages("weso")
   ), 
   
 )
 
 lazy val publishSettings = Seq(
-  maintainer      := "Jose Emilio Labra Gayo <labra@uniovi.es>",
+//  maintainer      := "Jose Emilio Labra Gayo <labra@uniovi.es>",
   homepage        := Some(url("https://github.com/weso/document")),
   licenses        := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
   scmInfo         := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git")),
@@ -114,8 +114,8 @@ lazy val publishSettings = Seq(
     "-diagrams",
   ),
   publishMavenStyle              := true,
-  bintrayRepository in bintray   := "weso-releases",
-  bintrayOrganization in bintray := Some("weso")
+  // bintrayRepository in bintray   := "weso-releases",
+  // bintrayOrganization in bintray := Some("weso")
 )
 
 
