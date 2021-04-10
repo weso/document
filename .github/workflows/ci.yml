@@ -12,7 +12,6 @@ on:
     branches: ['*']
   push:
     branches: ['*']
-    tags: [v*]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,7 +22,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.12.13]
+        scala: [2.12.13, 2.13.5, 3.0.0-RC2]
         java: [adopt@1.11]
     runs-on: ${{ matrix.os }}
     steps:
@@ -52,8 +51,23 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt ++${{ matrix.scala }} githubWorkflowCheck
 
-      - name: Build project
-        run: sbt ++${{ matrix.scala }} test
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Install Jekyll
+        run: |
+          gem install sass
+          gem install jekyll -v 4.0.0
+
+      - name: Test
+        run: sbt ++${{ matrix.scala }} clean coverage
+
+      - name: Coverage
+        run: sbt ++${{ matrix.scala }} coverageReport
+
+      - uses: codecov/codecov-action@v1
 
       - name: Compress target directories
         run: tar cf targets.tar target project/target
@@ -67,7 +81,7 @@ jobs:
   publish:
     name: Publish Artifacts
     needs: [build]
-    if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v'))
+    if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main')
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -103,6 +117,26 @@ jobs:
           name: target-${{ matrix.os }}-2.12.13-${{ matrix.java }}
 
       - name: Inflate target directories (2.12.13)
+        run: |
+          tar xf targets.tar
+          rm targets.tar
+
+      - name: Download target directories (2.13.5)
+        uses: actions/download-artifact@v2
+        with:
+          name: target-${{ matrix.os }}-2.13.5-${{ matrix.java }}
+
+      - name: Inflate target directories (2.13.5)
+        run: |
+          tar xf targets.tar
+          rm targets.tar
+
+      - name: Download target directories (3.0.0-RC2)
+        uses: actions/download-artifact@v2
+        with:
+          name: target-${{ matrix.os }}-3.0.0-RC2-${{ matrix.java }}
+
+      - name: Inflate target directories (3.0.0-RC2)
         run: |
           tar xf targets.tar
           rm targets.tar

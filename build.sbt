@@ -12,16 +12,12 @@ lazy val supportedScalaVersions = List(
 val Java11 = "adopt@1.11"  
 
 ThisBuild / crossScalaVersions := supportedScalaVersions
-ThisBuild / scalaVersion := crossScalaVersions.value.last
+// ThisBuild / scalaVersion := crossScalaVersions.value.last
 
 ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
-ThisBuild / githubWorkflowScalaVersions := (ThisBuild / crossScalaVersions).value.tail
+// ThisBuild / githubWorkflowScalaVersions := (ThisBuild / crossScalaVersions).value.tail
 
-// ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
-ThisBuild / githubWorkflowPublishTargetBranches := Seq(
-  RefPredicate.Equals(Ref.Branch("master")),
-  RefPredicate.StartsWith(Ref.Tag("v"))
-)
+// ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.Equals(Ref.Branch("master")), RefPredicate.StartsWith(Ref.Tag("v")))
 ThisBuild / githubWorkflowBuild := Seq(
   WorkflowStep
     .Use(UseRef.Public("ruby", "setup-ruby", "v1"), params = Map("ruby-version" -> "2.7"), name = Some("Set up Ruby")),
@@ -103,7 +99,7 @@ val compilerOptions = Seq(
 )
 
 lazy val compilationSettings = Seq(
-  scalaVersion := scala3,
+  // scalaVersion := scala3,
   // format: off
   scalacOptions ++= Seq(
     "-deprecation",                      // Emit warning and location for usages of deprecated APIs.
