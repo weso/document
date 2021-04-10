@@ -1,14 +1,14 @@
 lazy val scala212 = "2.12.13"
 lazy val scala213 = "2.13.5"
 lazy val scalaJs  = "0.6.31"
-lazy val scala3   = "3.0.0-M2"
+lazy val scala3   = "3.0.0-RC2"
 lazy val supportedScalaVersions = List(
   scala212, 
   scala213,
-//  scala3
+  scala3
   )
 
-lazy val munitVersion = "0.7.20"
+lazy val munitVersion = "0.7.23"
 
 lazy val munit        = "org.scalameta" %% "munit" % munitVersion % Test
 
@@ -25,8 +25,6 @@ lazy val document = project
   .settings(commonSettings, publishSettings, ghPagesSettings)
   .settings(
     crossScalaVersions := supportedScalaVersions,
-    unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject,
-    libraryDependencies ++= Seq( ),
     ThisBuild / turbo    := true,
     cancelable in Global := true,
     fork                 := true, 
@@ -63,20 +61,14 @@ val compilerOptions = Seq(
 )
 
 lazy val compilationSettings = Seq(
-  scalaVersion := scala213,
+  scalaVersion := scala3,
   // format: off
   scalacOptions ++= Seq(
     "-deprecation",                      // Emit warning and location for usages of deprecated APIs.
-    "-encoding", "utf-8",                // Specify character encoding used by source files.
-    "-explaintypes",                     // Explain type errors in more detail.
     "-feature",                          // Emit warning and location for usages of features that should be imported explicitly.  "-encoding", "UTF-8",
     "-language:_",
     "-unchecked",                        // Enable additional warnings where generated code depends on assumptions.
-    "-Xlint",
-    "-Yrangepos",
-    "-Ywarn-dead-code",                  // Warn when dead code is identified.
-    "-Xfatal-warnings",
-    "-Ywarn-extra-implicit",             // Warn when more than one implicit parameter section is defined.
+    "-Xfatal-warnings"
   )
   // format: on
 )
@@ -88,34 +80,18 @@ lazy val ghPagesSettings = Seq(
 lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
   organization := "es.weso",
   resolvers ++= Seq(
-//    Resolver.bintrayRepo("labra", "maven"),
-//    Resolver.bintrayRepo("weso", "weso-releases"),
-//    Resolver.sonatypeRepo("snapshots")
     Resolver.githubPackages("weso")
   ), 
   
 )
 
 lazy val publishSettings = Seq(
-//  maintainer      := "Jose Emilio Labra Gayo <labra@uniovi.es>",
   homepage        := Some(url("https://github.com/weso/document")),
   licenses        := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
   scmInfo         := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git")),
   autoAPIMappings := true,
   apiURL          := Some(url("http://weso.github.io/utils/latest/api/")),
-  javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),                     
-  scalacOptions in doc ++= Seq(
-    "-diagrams-debug",
-    "-target:jvm-1.8",
-    "-doc-source-url",
-    scmInfo.value.get.browseUrl + "/tree/master€{FILE_PATH}.scala",
-    "-sourcepath",
-    baseDirectory.in(LocalRootProject).value.getAbsolutePath,
-    "-diagrams",
-  ),
-  publishMavenStyle              := true,
-  // bintrayRepository in bintray   := "weso-releases",
-  // bintrayOrganization in bintray := Some("weso")
+  publishMavenStyle              := true
 )
 
 
