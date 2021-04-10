@@ -32,12 +32,7 @@ ThisBuild / githubWorkflowBuild := Seq(
   WorkflowStep.Sbt(
     List(
       "clean",
-      "coverage",
-      "scalastyle",
-      "scalafmtCheckAll",
-      "scalafmtSbtCheck",
-      "validateJVM",
-      "benchmark/test"
+      "coverage"
     ),
     id = None,
     name = Some("Test")
