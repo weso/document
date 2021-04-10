@@ -11,9 +11,50 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = "adopt@1.11"  
 
+ThisBuild / crossScalaVersions := supportedScalaVersions
+ThisBuild / scalaVersion := crossScalaVersions.value.last
+
 ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
-ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
-ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v")))
+ThisBuild / githubWorkflowScalaVersions := (ThisBuild / crossScalaVersions).value.tail
+
+// ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
+ThisBuild / githubWorkflowPublishTargetBranches := Seq(
+  RefPredicate.Equals(Ref.Branch("master")),
+  RefPredicate.StartsWith(Ref.Tag("v"))
+)
+ThisBuild / githubWorkflowBuild := Seq(
+  WorkflowStep
+    .Use(UseRef.Public("ruby", "setup-ruby", "v1"), params = Map("ruby-version" -> "2.7"), name = Some("Set up Ruby")),
+  WorkflowStep.Run(
+    List("gem install sass", "gem install jekyll -v 4.0.0"),
+    name = Some("Install Jekyll")
+  ),
+  WorkflowStep.Sbt(
+    List(
+      "clean",
+      "coverage",
+      "scalastyle",
+      "scalafmtCheckAll",
+      "scalafmtSbtCheck",
+      "validateJVM",
+      "benchmark/test"
+    ),
+    id = None,
+    name = Some("Test")
+  ),
+  WorkflowStep.Sbt(
+    List("coverageReport"),
+    id = None,
+    name = Some("Coverage")
+  ),
+  WorkflowStep.Use(
+    UseRef.Public(
+      "codecov",
+      "codecov-action",
+      "v1"
+    )
+  )
+)
 
 lazy val munitVersion = "0.7.23"
 
@@ -31,7 +72,6 @@ lazy val document = project
   // .disablePlugins(RevolverPlugin)
   .settings(commonSettings, publishSettings, ghPagesSettings)
   .settings(
-    crossScalaVersions := supportedScalaVersions,
     ThisBuild / turbo    := true,
     cancelable in Global := true,
     fork                 := true, 
