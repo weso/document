@@ -10,7 +10,9 @@ It consists os a basic pretty-printing library,
 
 You can see the [web page](https://weso.github.io/document) for technical documentation.
 
-|Code coverage|[![codecov](https://codecov.io/gh/weso/document/branch/master/graph/badge.svg)](https://codecov.io/gh/weso/document)|
+[![Continuous Integration](https://github.com/weso/document/actions/workflows/ci.yml/badge.svg)](https://github.com/weso/document/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/weso/document/branch/master/graph/badge.svg)](https://codecov.io/gh/weso/document)
+
 
 ## Further info
 
