@@ -2,11 +2,18 @@ lazy val scala212 = "2.12.13"
 lazy val scala213 = "2.13.5"
 lazy val scalaJs  = "0.6.31"
 lazy val scala3   = "3.0.0-RC2"
+
 lazy val supportedScalaVersions = List(
   scala212, 
   scala213,
   scala3
   )
+
+val Java11 = "adopt@1.11"  
+
+ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
+ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
+ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v")))
 
 lazy val munitVersion = "0.7.23"
 
