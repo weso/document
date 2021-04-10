@@ -46,6 +46,7 @@ ThisBuild / githubWorkflowBuild := Seq(
     )
   )
 )
+ThisBuild / versionScheme := Some("early-semver")
 
 lazy val munitVersion = "0.7.23"
 

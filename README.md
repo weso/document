@@ -1,17 +1,15 @@
-# document
+# document 
 
-This project contains code that was developed as part of the Scala standard library but was later deprecated
-A basic pretty-printing library, based on Lindig's strict version of Wadler's adaptation of Hughes' pretty-printer derived from [Document.scala](https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala) whose author was Michel Schinz.
+This project contains code that was developed as part of the Scala standard library but was later deprecated. 
+We maintain the code mainly because we used it in one of our projects and also as a small and simple test module that we can use to check continuous integration, documentation, cross-scala compilations, tests, and so on.
+
+It consists os a basic pretty-printing library, 
+ which was based on Lindig's strict version of Wadler's adaptation of Hughes' pretty-printer derived from 
+ [Document.scala](https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala) 
+ whose author was Michel Schinz.
 
 You can see the [web page](https://weso.github.io/document) for technical documentation.
 
-|CI|Status|
-|:---|:---|
-|GitHub - OpenJDK-12 Scala 2.12.10|[![Test openJDK12 scala 2.13.1](https://github.com/weso/document/workflows/test%20openJDK-12%20Scala-2.12.10/badge.svg)]()|
-|GitHub - OpenJDK-12 Scala 2.13.1|[![Test openJDK12 scala 2.13.1](https://github.com/weso/document/workflows/test%20openJDK-12%20Scala-2.13.1/badge.svg)]()|
-|GitHub - OracleJDK-12 Scala 2.12.10|[![Test openJDK12 scala 2.13.1](https://github.com/weso/document/workflows/test%20oracleJDK-12%20Scala-2.12.10/badge.svg)]()|
-|GitHub - OracleJDK-12 Scala 2.13.1|[![Test openJDK12 scala 2.13.1](https://github.com/weso/document/workflows/test%20oracleJDK-12%20Scala-2.13.1/badge.svg)]()|
-|Travis - Matrix configuration|[![Build Status](https://travis-ci.org/weso/document.svg?branch=master)](https://travis-ci.org/weso/document)
 |Code coverage|[![codecov](https://codecov.io/gh/weso/document/branch/master/graph/badge.svg)](https://codecov.io/gh/weso/document)|
 
 ## Further info
