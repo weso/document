@@ -6,7 +6,7 @@ lazy val scala3   = "3.0.0-RC2"
 lazy val supportedScalaVersions = List(
   scala212, 
   scala213,
-  scala3
+//  scala3
   )
 
 val Java11 = "adopt@1.11"  
