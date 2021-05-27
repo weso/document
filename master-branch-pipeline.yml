@@ -1,0 +1,36 @@
+pr: none
+
+trigger:
+- master
+
+# We define three different OS in our build strategy, to
+# ensure the project builds on all machines
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-latest'
+    mac:
+      imageName: "macos-10.15"
+    windows:
+      imageName: "windows-2019"
+  maxParallel: 3
+
+pool:
+  vmImage: $(imageName)
+
+steps:
+  # Setup SBT first for the master pipeline build
+  - task: setup-sbt@1
+    displayName: 'Setup SBT for pipeline'
+    inputs:
+      sbtVersion: '1.5.1'
+
+  # Compile the project
+  - script: |
+      sbt compile
+    displayName: 'sbt compile'
+
+  # Run the tests
+  - script: |
+      sbt compile
+    displayName: 'sbt test'
