@@ -4,17 +4,17 @@ lazy val scalaJs  = "0.6.31"
 lazy val scala3   = "3.0.0-RC2"
 
 lazy val supportedScalaVersions = List(
-  scala212, 
+  scala212,
   scala213,
 //  scala3
   )
 
-val Java11 = "adopt@1.11"  
+val Java11 = "adopt@1.11"
 
 ThisBuild / crossScalaVersions := supportedScalaVersions
 // ThisBuild / scalaVersion := crossScalaVersions.value.last
 
-ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
+// ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
 // ThisBuild / githubWorkflowScalaVersions := (ThisBuild / crossScalaVersions).value.tail
 
 // ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.Equals(Ref.Branch("master")), RefPredicate.StartsWith(Ref.Tag("v")))
@@ -62,15 +62,15 @@ lazy val document = project
   .in(file("."))
   .enablePlugins(AsciidoctorPlugin,SiteScaladocPlugin,GhpagesPlugin)
   // .disablePlugins(RevolverPlugin)
-  .settings(commonSettings, publishSettings, ghPagesSettings)
+  .settings(commonSettings, ghPagesSettings)
   .settings(
     ThisBuild / turbo    := true,
     cancelable in Global := true,
-    fork                 := true, 
-    coverageHighlighting := true, 
+    fork                 := true,
+    coverageHighlighting := true,
     testFrameworks += new TestFramework("munit.Framework"),
-    githubOwner := "weso",
-    githubRepository := "document"
+    // githubOwner := "weso",
+    // githubRepository := "document"
   )
 
 
@@ -81,7 +81,7 @@ lazy val document = project
 
 lazy val sharedDependencies = Seq(
   libraryDependencies ++= Seq(
-    munit 
+    munit
   )
 )
 
@@ -119,19 +119,39 @@ lazy val ghPagesSettings = Seq(
 lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
   organization := "es.weso",
   resolvers ++= Seq(
-    Resolver.githubPackages("weso")
-  ), 
-  
+    // Resolver.githubPackages("weso")
+  ),
+
 )
 
-lazy val publishSettings = Seq(
-  homepage        := Some(url("https://github.com/weso/document")),
-  licenses        := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
-  scmInfo         := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git")),
-  autoAPIMappings := true,
-  apiURL          := Some(url("http://weso.github.io/utils/latest/api/")),
-  publishMavenStyle              := true
-)
+//lazy val publishSettings = Seq(
+//  sonatypeProfileName := ("es.weso"),
+//  publishMavenStyle   := true,
+//  homepage            := Some(url("https://github.com/weso/document")),
+//  licenses            := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
+//  scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git")),
+//  autoAPIMappings     := true,
+//  apiURL              := Some(url("http://weso.github.io/utils/latest/api/")),
+//  publishMavenStyle   := true,
+//  sonatypeRepository  := "https://s01.oss.sonatype.org/service/local"
+//)
 
+/**********************************************************
+ ******************** Sonatype Settings *******************
+ **********************************************************/
 
-
+sonatypeProfileName := ("es.weso")
+publishMavenStyle   := true
+homepage            := Some(url("https://github.com/weso/document"))
+licenses            := Seq("MIT" -> url("http://opensource.org/licenses/MIT"))
+scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git"))
+autoAPIMappings     := true
+apiURL              := Some(url("http://weso.github.io/utils/latest/api/"))
+publishMavenStyle   := true
+publishTo in ThisBuild := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+}
