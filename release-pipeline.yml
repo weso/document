@@ -78,3 +78,7 @@ steps:
       sbt compile
     displayName: 'sbt test'
 
+  # Run the tests
+  - script: |
+      sbt publishSigned
+    displayName: 'sbt signed deploy to sonatype'
