@@ -3,8 +3,7 @@ pr: none
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: GCP2
 
 steps:
   # Setup SBT first for the master pipeline build
