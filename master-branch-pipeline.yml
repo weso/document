@@ -5,6 +5,9 @@ trigger:
 
 pool: GCP2
 
+variables:
+- group: SYSTEM_VAR_GROUP
+
 steps:
   # Everything needs Java to run
   - task: Bash@3
