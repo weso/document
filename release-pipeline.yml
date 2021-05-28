@@ -58,6 +58,12 @@ steps:
     inputs:
       sbtVersion: '1.5.1'
 
+
+  # Set the Sonatype credentials for SBT
+  - script: |
+      cd document
+    displayName: 'cd into project directory'
+
   # Set the Sonatype credentials for SBT
   - script: |
       sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org","$(SONATYPE_USER)","$(SONATYPE_PASS)")'
