@@ -7,11 +7,19 @@ pool: GCP2
 
 steps:
   # Everything needs Java to run
-  - task: JavaToolInstaller@0
+  - task: Bash@3
+    displayName: 'Download java sdk'
     inputs:
-      versionSpec: '11'
-      jdkArchitectureOption: 'x64'
-      jdkSourceOption: 'PreInstalled'
+      targetType: 'inline'
+      script: 'wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u262-b10/openlogic-openjdk-8u262-b10-linux-x64.tar.gz -O $(Build.ArtifactStagingDirectory)/java8.tar.gz'
+  - task: JavaToolInstaller@0
+    displayName: 'Install java sdk'
+    inputs:
+      versionSpec: "8"
+      jdkArchitectureOption: x64
+      jdkSourceOption: LocalDirectory
+      jdkFile: "$(Build.ArtifactStagingDirectory)/java8.tar.gz"
+      jdkDestinationDirectory: ""
 
   # Setup SBT first for the master pipeline build
   - task: setup-sbt@1
