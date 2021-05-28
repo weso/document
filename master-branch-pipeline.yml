@@ -30,7 +30,7 @@ steps:
   # Set the Sonatype credentials for SBT
   - script: |
       pwd
-      cd $(System.DefaultWorkingDirectory)
+      cd $(System.DefaultWorkingDirectory)/.git/
       ls -la
       pwd
     displayName: 'cd into project directory'
