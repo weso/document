@@ -40,5 +40,5 @@ steps:
 
   # Run the tests
   - script: |
-      sbt compile
+      sbt test
     displayName: 'sbt test'
