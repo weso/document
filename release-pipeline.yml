@@ -16,17 +16,17 @@ steps:
   - task: DownloadSecureFile@1
     displayName: 'Download public key.'
     inputs:
-      secureFile: public.key
+      secureFile: public.pgp
 
   - task: DownloadSecureFile@1
     displayName: 'Download private key.'
     inputs:
-      secureFile: private.key
+      secureFile: private.pgp
 
   # Import both the private and public keys into gpg for signing.
   - bash: |
-      gpg --import --no-tty --batch --yes $(Agent.TempDirectory)/public.key
-      gpg --import --no-tty --batch --yes $(Agent.TempDirectory)/private.key
+      gpg --import --no-tty --batch --yes $(Agent.TempDirectory)/public.pgp
+      gpg --import --no-tty --batch --yes $(Agent.TempDirectory)/private.pgp
       gpg --list-keys --keyid-format LONG
       gpg --list-secret-keys --keyid-format LONG
     displayName: 'Import signing keys.'
