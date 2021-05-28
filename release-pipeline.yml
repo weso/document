@@ -72,6 +72,11 @@ steps:
       sbt test
     displayName: 'sbt test'
 
+  # Test GPG Installation
+  - script: |
+      gpg --version
+    displayName: 'debug gpg installation'
+
   # Run the tests
   - script: |
       sbt publishSigned
