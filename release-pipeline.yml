@@ -8,6 +8,7 @@ pool: GCP2
 variables:
 - group: SONATYPE_VAR_GROUP
 - group: PGP_VAR_GROUP
+- group: SYSTEM_VAR_GROUP
 
 steps:
   # We need a valid signing key. 
@@ -17,7 +18,6 @@ steps:
     displayName: 'Download public key.'
     inputs:
       secureFile: public.pgp
-
   - task: DownloadSecureFile@1
     displayName: 'Download private key.'
     inputs:
@@ -31,39 +31,27 @@ steps:
       gpg --list-secret-keys --keyid-format LONG
     displayName: 'Import signing keys.'
 
+  # Set PGP PASSPHARSE as Environment Variable
   - bash: |
       echo "Setting PGP passphrase as environment variable..."
     displayName: 'Setting PGP passphrase as environment variable'
     env:
       PGP_PASSPHRASE: $(PGP_PASSPHRASE) # map PGP passphrase to an env variable
 
-  # Everything needs Java to run
-  - task: Bash@3
-    displayName: 'Download java sdk'
+  # Install Java 11
+  - task: adopt-openjdk-installer@1
     inputs:
-      targetType: 'inline'
-      script: 'wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u262-b10/openlogic-openjdk-8u262-b10-linux-x64.tar.gz -O $(Build.ArtifactStagingDirectory)/java8.tar.gz'
-  - task: JavaToolInstaller@0
-    displayName: 'Install java sdk'
-    inputs:
-      versionSpec: "8"
-      jdkArchitectureOption: x64
-      jdkSourceOption: LocalDirectory
-      jdkFile: "$(Build.ArtifactStagingDirectory)/java8.tar.gz"
-      jdkDestinationDirectory: ""
+      majorVersion: '11'
+      useLatestOption: 'latest'
+      jdkArchitectureOption: 'x64'
+      jvmOption: 'hotspot'
 
   # Setup SBT first for the master pipeline build
   - task: setup-sbt@1
     displayName: 'Setup SBT for pipeline'
     inputs:
       sbtVersion: '1.5.1'
-
-
-  # Set the Sonatype credentials for SBT
-  - script: |
-      ls -la
-    displayName: 'cd into project directory'
-
+    
   # Set the Sonatype credentials for SBT
   - script: |
       sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org","$(SONATYPE_USER)","$(SONATYPE_PASS)")'
