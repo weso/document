@@ -8,9 +8,7 @@ pool: GCP2
 variables:
 - group: SYSTEM_VAR_GROUP
 
-jobs:
-- job: setupEnvironment
-  steps:
+steps:
   - task: adopt-openjdk-installer@1
     inputs:
       majorVersion: '11'
@@ -22,9 +20,7 @@ jobs:
     displayName: 'Setup SBT for pipeline'
     inputs:
       sbtVersion: '1.5.1'
-      
-- job: buildAndTestProject       
-  steps:
+    
   # Set the Sonatype credentials for SBT
   - script: |
       pwd
