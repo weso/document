@@ -61,7 +61,7 @@ steps:
 
   # Set the Sonatype credentials for SBT
   - script: |
-      cd document
+      ls -la
     displayName: 'cd into project directory'
 
   # Set the Sonatype credentials for SBT
