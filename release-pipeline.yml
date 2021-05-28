@@ -1,0 +1,69 @@
+pr: none
+
+trigger:
+- master
+
+pool: GCP2
+
+variables:
+- group: SONATYPE_VAR_GROUP
+- group: PGP_VAR_GROUP
+
+steps:
+  # We need a valid signing key. 
+  # The next two steps download the public and private keys from the
+  # secure library files. 
+  - task: DownloadSecureFile@1
+    displayName: 'Download public key.'
+    inputs:
+      secureFile: public.key
+
+  - task: DownloadSecureFile@1
+    displayName: 'Download private key.'
+    inputs:
+      secureFile: private.key
+
+  # Import both the private and public keys into gpg for signing.
+  - bash: |
+      gpg --import --no-tty --batch --yes $(Agent.TempDirectory)/public.key
+      gpg --import --no-tty --batch --yes $(Agent.TempDirectory)/private.key
+      gpg --list-keys --keyid-format LONG
+      gpg --list-secret-keys --keyid-format LONG
+    displayName: 'Import signing keys.'
+
+  # Everything needs Java to run
+  - task: Bash@3
+    displayName: 'Download java sdk'
+    inputs:
+      targetType: 'inline'
+      script: 'wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u262-b10/openlogic-openjdk-8u262-b10-linux-x64.tar.gz -O $(Build.ArtifactStagingDirectory)/java8.tar.gz'
+  - task: JavaToolInstaller@0
+    displayName: 'Install java sdk'
+    inputs:
+      versionSpec: "8"
+      jdkArchitectureOption: x64
+      jdkSourceOption: LocalDirectory
+      jdkFile: "$(Build.ArtifactStagingDirectory)/java8.tar.gz"
+      jdkDestinationDirectory: ""
+
+  # Setup SBT first for the master pipeline build
+  - task: setup-sbt@1
+    displayName: 'Setup SBT for pipeline'
+    inputs:
+      sbtVersion: '1.5.1'
+
+  # Set the Sonatype credentials for SBT
+  - script: |
+      sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org","$(SONATYPE_USER)","$(SONATYPE_PASS)")'
+    displayName: 'sbt set sonatype credentials'
+
+  # Compile the project
+  - script: |
+      sbt compile
+    displayName: 'sbt compile'
+
+  # Run the tests
+  - script: |
+      sbt compile
+    displayName: 'sbt test'
+
