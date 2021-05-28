@@ -9,6 +9,7 @@ variables:
 - group: SYSTEM_VAR_GROUP
 
 steps:
+  # Install Java 11
   - task: adopt-openjdk-installer@1
     inputs:
       majorVersion: '11'
