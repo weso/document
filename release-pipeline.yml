@@ -31,6 +31,12 @@ steps:
       gpg --list-secret-keys --keyid-format LONG
     displayName: 'Import signing keys.'
 
+  - bash: |
+      echo "Setting PGP passphrase as environment variable..."
+    displayName: 'Setting PGP passphrase as environment variable'
+    env:
+      PGP_PASSPHRASE: $(PGP_PASSPHRASE) # map PGP passphrase to an env variable
+
   # Everything needs Java to run
   - task: Bash@3
     displayName: 'Download java sdk'
@@ -56,6 +62,11 @@ steps:
   - script: |
       sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org","$(SONATYPE_USER)","$(SONATYPE_PASS)")'
     displayName: 'sbt set sonatype credentials'
+
+  # Set the Sonatype credentials for SBT
+  - script: |
+      sbt 'set credentials += Credentials("GnuPG Key ID", "gpg", "$(PGP_KEYNAME)","this field is ignored")'
+    displayName: 'sbt set gpg credentials'
 
   # Compile the project
   - script: |
