@@ -6,6 +6,13 @@ trigger:
 pool: GCP2
 
 steps:
+  # Everything needs Java to run
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+
   # Setup SBT first for the master pipeline build
   - task: setup-sbt@1
     displayName: 'Setup SBT for pipeline'
