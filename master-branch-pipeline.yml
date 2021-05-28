@@ -27,6 +27,11 @@ steps:
     inputs:
       sbtVersion: '1.5.1'
 
+  # Set the Sonatype credentials for SBT
+  - script: |
+      cd $(System.DefaultWorkingDirectory)/document
+    displayName: 'cd into project directory'
+
   # Compile the project
   - script: |
       sbt compile
