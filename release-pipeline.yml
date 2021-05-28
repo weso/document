@@ -59,7 +59,7 @@ steps:
 
   # Set the Sonatype credentials for SBT
   - script: |
-      sbt 'set credentials += Credentials("GnuPG Key ID", "gpg", "$(PGP_KEYNAME)","this field is ignored")'
+      sbt 'set credentials += Credentials("GnuPG Key ID", "gpg", "$(PGP_KEYNAME)","$(PGP_PASSPHRASE)")'
     displayName: 'sbt set gpg credentials'
 
   # Compile the project
