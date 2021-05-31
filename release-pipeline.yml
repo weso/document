@@ -9,6 +9,7 @@ variables:
 - group: SONATYPE_VAR_GROUP
 - group: PGP_VAR_GROUP
 - group: SYSTEM_VAR_GROUP
+- name: PGP_PASSPHRASE
 
 steps:
   # We need a valid signing key. 
