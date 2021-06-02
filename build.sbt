@@ -148,6 +148,13 @@ scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "sc
 autoAPIMappings     := true
 apiURL              := Some(url("http://weso.github.io/utils/latest/api/"))
 publishMavenStyle   := true
+developers := List(
+  Developer(
+    id="markiantorno",
+    name="Mark Iantorno",
+    email="markiantorno@gmail.com",
+    url=url("https://hl7.github.org")
+  ))
 publishTo in ThisBuild := {
   val nexus = "https://oss.sonatype.org/"
   if (isSnapshot.value)
