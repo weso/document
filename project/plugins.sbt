@@ -11,5 +11,5 @@ addSbtPlugin("com.typesafe.sbt"  % "sbt-ghpages"         % "0.6.3")
 // addSbtPlugin("org.foundweekends" % "sbt-bintray"         % "0.6.1")
 addSbtPlugin("org.scoverage"     % "sbt-scoverage"       % "1.6.1")
 
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.7")
-addSbtPlugin("com.github.sbt" % "sbt-pgp" % "2.1.2")
+addSbtPlugin("au.com.onegeek" % "sbt-dotenv" % "2.1.146")
+addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.5.7")
