@@ -1,4 +1,4 @@
-addSbtPlugin("com.codecommit"    % "sbt-github-actions"  % "0.10.1")
+addSbtPlugin("com.codecommit"    % "sbt-github-actions"  % "0.12.0")
 //addSbtPlugin("com.codecommit"    % "sbt-github-packages" % "0.5.2")
 addSbtPlugin("com.47deg"         % "sbt-microsites"      % "1.2.1")
 addSbtPlugin("com.eed3si9n"      % "sbt-unidoc"          % "0.4.3")
