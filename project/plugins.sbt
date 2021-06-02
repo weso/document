@@ -11,5 +11,5 @@ addSbtPlugin("com.typesafe.sbt"  % "sbt-ghpages"         % "0.6.3")
 // addSbtPlugin("org.foundweekends" % "sbt-bintray"         % "0.6.1")
 addSbtPlugin("org.scoverage"     % "sbt-scoverage"       % "1.6.1")
 
-addSbtPlugin("au.com.onegeek" % "sbt-dotenv" % "2.1.146")
+addSbtPlugin("au.com.onegeek" % "sbt-dotenv" % "2.1.233")
 addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.5.7")
