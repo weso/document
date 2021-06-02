@@ -48,7 +48,7 @@ ThisBuild / githubWorkflowBuild := Seq(
 )
 ThisBuild / versionScheme := Some("early-semver")
 
-lazy val munitVersion = "0.7.23"
+lazy val munitVersion = "0.7.26"
 
 lazy val munit        = "org.scalameta" %% "munit" % munitVersion % Test
 
