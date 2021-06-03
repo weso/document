@@ -3,16 +3,13 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "SRDF",
+    "tagline": "Document",
     "docs": {
       "overview": {
         "title": "Overview"
       },
       "readme": {
         "title": "Readme"
-      },
-      "srdfJena": {
-        "title": "SRDFJena"
       }
     },
     "links": {

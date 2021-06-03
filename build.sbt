@@ -19,12 +19,12 @@ ThisBuild / crossScalaVersions := supportedScalaVersions
 
 // ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.Equals(Ref.Branch("master")), RefPredicate.StartsWith(Ref.Tag("v")))
 ThisBuild / githubWorkflowBuild := Seq(
-  WorkflowStep
+/*  WorkflowStep
     .Use(UseRef.Public("ruby", "setup-ruby", "v1"), params = Map("ruby-version" -> "2.7"), name = Some("Set up Ruby")),
   WorkflowStep.Run(
     List("gem install sass", "gem install jekyll -v 4.0.0"),
     name = Some("Install Jekyll")
-  ),
+  ), */
   WorkflowStep.Sbt(
     List(
       "clean",
@@ -46,7 +46,10 @@ ThisBuild / githubWorkflowBuild := Seq(
     )
   )
 )
+
 ThisBuild / versionScheme := Some("early-semver")
+
+// Dependencies 
 
 lazy val munitVersion = "0.7.26"
 
@@ -113,7 +116,6 @@ lazy val noPublishSettings = publish / skip := true
 
 lazy val noDocProjects = Seq[ProjectReference]()
 
-
 lazy val sharedDependencies = Seq(
   libraryDependencies ++= Seq(
     munit
@@ -154,22 +156,9 @@ lazy val compilationSettings = Seq(
 lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
   organization := "es.weso",
   resolvers ++= Seq(
-    // Resolver.githubPackages("weso")
   ),
 
 )
-
-//lazy val publishSettings = Seq(
-//  sonatypeProfileName := ("es.weso"),
-//  publishMavenStyle   := true,
-//  homepage            := Some(url("https://github.com/weso/document")),
-//  licenses            := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
-//  scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git")),
-//  autoAPIMappings     := true,
-//  apiURL              := Some(url("http://weso.github.io/utils/latest/api/")),
-//  publishMavenStyle   := true,
-//  sonatypeRepository  := "https://s01.oss.sonatype.org/service/local"
-//)
 
 /**********************************************************
  ******************** Sonatype Settings *******************

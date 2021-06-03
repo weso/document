@@ -1,17 +1,17 @@
-const repoUrl = "https://github.com/weso/srdf";
+const repoUrl = "https://github.com/weso/document";
 
-const apiUrl = "/srdf/api/es/weso/index.html";
+const apiUrl = "/document/api/es/weso/index.html";
 
 // See https://docusaurus.io/docs/site-config for available options.
 const siteConfig = {
-  title: "SRDF (Simple RDF)",
-  tagline: "SRDF",
-  url: "https://weso.github.io/srdf",
-  baseUrl: "/srdf/",
+  title: "Document (library)",
+  tagline: "Document",
+  url: "https://weso.github.io/document",
+  baseUrl: "/document/",
 
-  customDocsPath: "srdf-docs/target/mdoc",
+  customDocsPath: "document-docs/target/mdoc",
 
-  projectName: "srdf",
+  projectName: "document",
   organizationName: "weso",
 
   headerLinks: [
