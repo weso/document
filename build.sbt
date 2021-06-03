@@ -1,12 +1,12 @@
-lazy val scala212 = "2.12.13"
-lazy val scala213 = "2.13.5"
+lazy val scala212 = "2.12.14"
+lazy val scala213 = "2.13.6"
 lazy val scalaJs  = "0.6.31"
-lazy val scala3   = "3.0.0-RC2"
+lazy val scala3   = "3.0.0"
 
 lazy val supportedScalaVersions = List(
   scala212,
   scala213,
-//  scala3
+  scala3
   )
 
 val Java11 = "adopt@1.11"
@@ -48,7 +48,7 @@ ThisBuild / githubWorkflowBuild := Seq(
 )
 ThisBuild / versionScheme := Some("early-semver")
 
-lazy val munitVersion = "0.7.23"
+lazy val munitVersion = "0.7.26"
 
 lazy val munit        = "org.scalameta" %% "munit" % munitVersion % Test
 
@@ -60,23 +60,58 @@ def priorTo2_13(scalaVersion: String): Boolean =
 
 lazy val document = project
   .in(file("."))
-  .enablePlugins(AsciidoctorPlugin,SiteScaladocPlugin,GhpagesPlugin)
-  // .disablePlugins(RevolverPlugin)
-  .settings(commonSettings, ghPagesSettings)
+  .enablePlugins(
+  )
   .settings(
+    commonSettings,
     ThisBuild / turbo    := true,
     cancelable in Global := true,
     fork                 := true,
     coverageHighlighting := true,
     testFrameworks += new TestFramework("munit.Framework"),
-    // githubOwner := "weso",
-    // githubRepository := "document"
   )
+//   .aggregate(docs)
 
 
-/* ********************************************************
- ******************** Grouped Settings ********************
- **********************************************************/
+/* Docs generation */  
+
+lazy val docs = project   
+  .in(file("document-docs")) 
+  .settings(
+    noPublishSettings,
+    mdocSettings,
+    ScalaUnidoc / unidoc / unidocProjectFilter := inAnyProject -- inProjects(noDocProjects: _*)
+   )
+  .dependsOn(document)
+  .enablePlugins(MdocPlugin, DocusaurusPlugin, ScalaUnidocPlugin)
+
+lazy val mdocSettings = Seq(
+  mdocVariables := Map(
+    "VERSION" -> version.value
+  ),
+  ScalaUnidoc / unidoc / target := (LocalRootProject / baseDirectory).value / "website" / "static" / "api",
+  cleanFiles += (ScalaUnidoc / unidoc / target).value,
+  docusaurusCreateSite := docusaurusCreateSite
+    .dependsOn(Compile / unidoc)
+    .value,
+  docusaurusPublishGhpages :=
+    docusaurusPublishGhpages
+      .dependsOn(Compile / unidoc)
+      .value,
+  ScalaUnidoc / unidoc / scalacOptions ++= Seq(
+    "-doc-source-url", s"https://github.com/weso/srdf/tree/v${(ThisBuild / version).value}€{FILE_PATH}.scala",
+    "-sourcepath", (LocalRootProject / baseDirectory).value.getAbsolutePath,
+    "-doc-title", "SRDF",
+    "-doc-version", s"v${(ThisBuild / version).value}"
+  )
+)
+
+lazy val noPublishSettings = publish / skip := true
+
+
+/*  Grouped Settings */
+
+lazy val noDocProjects = Seq[ProjectReference]()
 
 
 lazy val sharedDependencies = Seq(
@@ -112,9 +147,9 @@ lazy val compilationSettings = Seq(
   // format: on
 )
 
-lazy val ghPagesSettings = Seq(
+/*lazy val ghPagesSettings = Seq(
   git.remoteRepo := "git@github.com:weso/document.git"
-)
+)*/
 
 lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
   organization := "es.weso",
@@ -148,7 +183,14 @@ scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "sc
 autoAPIMappings     := true
 apiURL              := Some(url("http://weso.github.io/utils/latest/api/"))
 publishMavenStyle   := true
-publishTo in ThisBuild := {
+developers := List(
+  Developer(
+    id="markiantorno",
+    name="Mark Iantorno",
+    email="markiantorno@gmail.com",
+    url=url("https://hl7.github.org")
+  ))
+ThisBuild / publishTo := {
   val nexus = "https://oss.sonatype.org/"
   if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
