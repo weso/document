@@ -11,6 +11,8 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = "adopt@1.11"
 
+ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
+
 ThisBuild / crossScalaVersions := supportedScalaVersions
 // ThisBuild / scalaVersion := crossScalaVersions.value.last
 
@@ -49,7 +51,7 @@ ThisBuild / crossScalaVersions := supportedScalaVersions
 
 ThisBuild / versionScheme := Some("early-semver")
 
-// Dependencies 
+// Dependencies
 
 lazy val munitVersion = "0.7.26"
 
@@ -76,10 +78,10 @@ lazy val document = project
     testFrameworks += new TestFramework("munit.Framework"),
   )
 
-/* Docs generation */  
+/* Docs generation */
 
-lazy val docs = project   
-  .in(file("document-docs")) 
+lazy val docs = project
+  .in(file("document-docs"))
   .settings(
     publish / skip := true,
     mdocSettings,
