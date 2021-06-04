@@ -72,7 +72,6 @@ lazy val document = project
     ThisBuild / turbo    := true,
     cancelable in Global := true,
     fork                 := true,
-    coverageHighlighting := true,
     testFrameworks += new TestFramework("munit.Framework"),
   )
 
