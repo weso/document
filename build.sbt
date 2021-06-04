@@ -155,36 +155,32 @@ lazy val compilationSettings = Seq(
   git.remoteRepo := "git@github.com:weso/document.git"
 )*/
 
-lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
-  organization := "es.weso",
-  resolvers ++= Seq(
-  ),
-
-)
-
 /**********************************************************
  ******************** Sonatype Settings *******************
  **********************************************************/
 
-sonatypeProfileName := ("es.weso")
-publishMavenStyle   := true
-homepage            := Some(url("https://github.com/weso/document"))
-licenses            := Seq("MIT" -> url("http://opensource.org/licenses/MIT"))
-scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git"))
-autoAPIMappings     := true
-apiURL              := Some(url("http://weso.github.io/utils/latest/api/"))
-publishMavenStyle   := true
-developers := List(
-  Developer(
-    id="markiantorno",
-    name="Mark Iantorno",
-    email="markiantorno@gmail.com",
-    url=url("https://hl7.github.org")
-  ))
-ThisBuild / publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+ lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
+   organization := "es.weso",
+   sonatypeProfileName := ("es.weso"),
+   publishMavenStyle   := true,
+   homepage            := Some(url("https://github.com/weso/document")),
+   licenses            := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
+   scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git")),
+   autoAPIMappings     := true,
+   apiURL              := Some(url("http://weso.github.io/utils/latest/api/")),
+   autoAPIMappings     := true,
+   developers := List(
+     Developer(
+       id="labra",
+       name="Jose Emilio Labra Gayo",
+       email="jelabra@gmail.com",
+       url=url("https://weso.labra.es")
+     )),
+   ThisBuild / publishTo := {
+     val nexus = "https://oss.sonatype.org/"
+     if (isSnapshot.value)
+       Some("snapshots" at nexus + "content/repositories/snapshots")
+     else
+       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+   }
+ )
