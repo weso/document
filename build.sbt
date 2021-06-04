@@ -61,10 +61,12 @@ def priorTo2_13(scalaVersion: String): Boolean =
     case _                              => false
   }
 
+lazy val root = project
+ .in(file("."))
+ .aggregate(document,docs)
+
 lazy val document = project
-  .in(file("."))
-  .enablePlugins(
-  )
+  .in(file("modules/document"))
   .settings(
     commonSettings,
     ThisBuild / turbo    := true,
@@ -73,8 +75,6 @@ lazy val document = project
     coverageHighlighting := true,
     testFrameworks += new TestFramework("munit.Framework"),
   )
-//   .aggregate(docs)
-
 
 /* Docs generation */  
 
