@@ -61,8 +61,9 @@ def priorTo2_13(scalaVersion: String): Boolean =
     case _                              => false
   }
 
-lazy val root = project
+lazy val rootDocument = project
  .in(file("."))
+ .settings(publish / skip := true)
  .aggregate(document,docs)
 
 lazy val document = project
@@ -80,7 +81,7 @@ lazy val document = project
 lazy val docs = project   
   .in(file("document-docs")) 
   .settings(
-    noPublishSettings,
+    publish / skip := true,
     mdocSettings,
     ScalaUnidoc / unidoc / unidocProjectFilter := inAnyProject -- inProjects(noDocProjects: _*)
    )
@@ -108,7 +109,7 @@ lazy val mdocSettings = Seq(
   )
 )
 
-lazy val noPublishSettings = publish / skip := true
+
 
 
 /*  Grouped Settings */
