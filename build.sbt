@@ -155,8 +155,22 @@ lazy val ghPagesSettings = Seq(
 /**********************************************************
  ******************** Sonatype Settings *******************
  **********************************************************/
+ inThisBuild(List(
+    organization        := "es.weso",
+    homepage            := Some(url("https://github.com/weso/document")),
+    licenses            := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
+    developers := List(
+      Developer(
+        id="labra",
+        name="Jose Emilio Labra Gayo",
+        email="jelabra@gmail.com",
+        url=url("https://weso.labra.es")
+      )
+    )
+ ))
 
- lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
+
+ /*lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
    organization := "es.weso",
    sonatypeProfileName := ("es.weso"),
    publishMavenStyle   := true,
@@ -180,4 +194,4 @@ lazy val ghPagesSettings = Seq(
      else
        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
    }
- )
+ )*/
