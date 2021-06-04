@@ -170,8 +170,8 @@ lazy val ghPagesSettings = Seq(
  ))
 
 
- /*lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
-   organization := "es.weso",
+ lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
+   /*organization := "es.weso",
    sonatypeProfileName := ("es.weso"),
    publishMavenStyle   := true,
    homepage            := Some(url("https://github.com/weso/document")),
@@ -193,5 +193,5 @@ lazy val ghPagesSettings = Seq(
        Some("snapshots" at nexus + "content/repositories/snapshots")
      else
        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-   }
- )*/
+   }*/
+ )
