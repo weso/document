@@ -51,13 +51,8 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt --client '++${{ matrix.scala }}; githubWorkflowCheck'
 
-      - name: Test
-        run: sbt --client '++${{ matrix.scala }}; clean; coverage'
-
-      - name: Coverage
-        run: sbt --client '++${{ matrix.scala }}; coverageReport'
-
-      - uses: codecov/codecov-action@v1
+      - name: Build project
+        run: sbt --client '++${{ matrix.scala }}; test'
 
       - name: Compress target directories
         run: tar cf targets.tar target modules/document/target document-docs/target project/target
