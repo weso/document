@@ -18,7 +18,7 @@ ThisBuild / crossScalaVersions := supportedScalaVersions
 // ThisBuild / githubWorkflowScalaVersions := (ThisBuild / crossScalaVersions).value.tail
 
 // ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.Equals(Ref.Branch("master")), RefPredicate.StartsWith(Ref.Tag("v")))
-ThisBuild / githubWorkflowBuild := Seq(
+/* ThisBuild / githubWorkflowBuild := Seq(
 /*  WorkflowStep
     .Use(UseRef.Public("ruby", "setup-ruby", "v1"), params = Map("ruby-version" -> "2.7"), name = Some("Set up Ruby")),
   WorkflowStep.Run(
@@ -45,7 +45,7 @@ ThisBuild / githubWorkflowBuild := Seq(
       "v1"
     )
   )
-)
+) */
 
 ThisBuild / versionScheme := Some("early-semver")
 
