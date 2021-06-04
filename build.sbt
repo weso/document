@@ -158,11 +158,18 @@ lazy val compilationSettings = Seq(
 /**********************************************************
  ******************** Sonatype Settings *******************
  **********************************************************/
+/* ThisBuild / publishTo := {
+   val nexus = "https://oss.sonatype.org/"
+   if (isSnapshot.value)
+     Some("snapshots" at nexus + "content/repositories/snapshots")
+   else
+     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+ }*/
 
  lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
    organization := "es.weso",
    sonatypeProfileName := ("es.weso"),
-   publishMavenStyle   := true,
+   //publishMavenStyle   := true,
    homepage            := Some(url("https://github.com/weso/document")),
    licenses            := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
    scmInfo             := Some(ScmInfo(url("https://github.com/weso/document"), "scm:git:git@github.com:weso/document.git")),
@@ -175,12 +182,5 @@ lazy val compilationSettings = Seq(
        name="Jose Emilio Labra Gayo",
        email="jelabra@gmail.com",
        url=url("https://weso.labra.es")
-     )),
-   ThisBuild / publishTo := {
-     val nexus = "https://oss.sonatype.org/"
-     if (isSnapshot.value)
-       Some("snapshots" at nexus + "content/repositories/snapshots")
-     else
-       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-   }
+     ))
  )
