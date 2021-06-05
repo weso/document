@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Overview · Document (library)</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# Overview of Document library"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Overview · Document (library)"/><meta property="og:type" content="website"/><meta property="og:url" content="https://weso.github.io/document/document/"/><meta property="og:description" content="# Overview of Document library"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/document/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script src="/document/js/scrollSpy.js"></script><link rel="stylesheet" href="/document/css/main.css"/><script src="/document/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/document/"><img class="logo" src="/document/img/logo-weso.png" alt="Document (library)"/><h2 class="headerTitleWithLogo">Document (library)</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/document/api/es/weso/index.html" target="_self">API Docs</a></li><li class="siteNavItemActive"><a href="/document/docs/overview" target="_self">Documentation</a></li><li class=""><a href="https://github.com/weso/document" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Overview</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="overview-of-document-library"></a><a href="#overview-of-document-library" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview of Document library</h1>
+<p>The document library contains code that was developed as part of the Scala standard library but was later deprecated.</p>
+<p>We maintain the code mainly because we used it in one of our projects and also as a small and simple test module that we can use to check continuous integration, documentation, cross-scala compilations, tests, and so on.</p>
+<p>It consists os a basic pretty-printing library, which was based on Lindig's strict version of Wadler's adaptation of Hughes' pretty-printer derived from
+<a href="https://github.com/scala/scala/blob/v2.11.8/src/library/scala/text/Document.scala">Document.scala</a> whose author was Michel Schinz.</p>
+<p>You can see the <a href="https://weso.github.io/document">web page</a> for technical documentation.</p>
+<h2><a class="anchor" aria-hidden="true" id="further-info"></a><a href="#further-info" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Further info</h2>
+<ul>
+<li><a href="http://www.cse.chalmers.se/~rjmh/Papers/pretty.html">The design of a pretty-printing library</a> by John Hughes, describes the original pretty-printing library in Haskell, <a href="http://belle.sourceforge.net/doc/hughes95design.pdf">PDF</a></li>
+<li><a href="https://lindig.github.io/papers/strictly-pretty-2000.pdf">Strictly Pretty Paper</a> by Christian Lindig, describes a strict implementation of the pretty printing algorithm in OCaml</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="example-usage"></a><a href="#example-usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example usage</h2>
+<p>In order to use the library:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> es.weso.document._
+</code></pre>
+<p>Let's declare a simple <code>Tree</code> case class:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tree</span>(<span class="hljs-params">value: <span class="hljs-type">String</span>, leaves: <span class="hljs-type">List</span>[<span class="hljs-type">Tree</span>]</span>)</span>
+</code></pre>
+<p>We can define a <code>tree2Doc</code> function that converts trees to documents as:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tree2Doc</span></span>(tree: <span class="hljs-type">Tree</span>): <span class="hljs-type">Document</span> = 
+ <span class="hljs-type">DocText</span>(tree.value) :/: <span class="hljs-type">DocNest</span>(<span class="hljs-number">1</span>,list2doc(tree.leaves))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">list2doc</span></span>(ls: <span class="hljs-type">List</span>[<span class="hljs-type">Tree</span>]): <span class="hljs-type">Document</span> = 
+ ls.foldLeft(<span class="hljs-type">Document</span>.empty){ <span class="hljs-keyword">case</span> (acc,t) =&gt; tree2Doc(t) :/: acc }
+</code></pre>
+<p>In that way, given the following tree:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> myTree = <span class="hljs-type">Tree</span>(<span class="hljs-string">"A"</span>, <span class="hljs-type">List</span>(<span class="hljs-type">Tree</span>(<span class="hljs-string">"B"</span>, <span class="hljs-type">List</span>()), <span class="hljs-type">Tree</span>(<span class="hljs-string">"C"</span>, <span class="hljs-type">List</span>())))
+<span class="hljs-comment">// myTree: Tree = Tree("A", List(Tree("B", List()), Tree("C", List())))</span>
+</code></pre>
+<p>We can convert it to a document as:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> myDoc = tree2Doc(myTree)
+<span class="hljs-comment">// myDoc: Document = DocCons(</span>
+<span class="hljs-comment">//   DocText("A"),</span>
+<span class="hljs-comment">//   DocCons(</span>
+<span class="hljs-comment">//     DocBreak,</span>
+<span class="hljs-comment">//     DocNest(</span>
+<span class="hljs-comment">//       1,</span>
+<span class="hljs-comment">//       DocCons(</span>
+<span class="hljs-comment">//         DocCons(DocText("C"), DocCons(DocBreak, DocNest(1, DocNil))),</span>
+<span class="hljs-comment">//         DocCons(</span>
+<span class="hljs-comment">//           DocBreak,</span>
+<span class="hljs-comment">//           DocCons(</span>
+<span class="hljs-comment">//             DocCons(DocText("B"), DocCons(DocBreak, DocNest(1, DocNil))),</span>
+<span class="hljs-comment">//             DocCons(DocBreak, DocNil)</span>
+<span class="hljs-comment">//           )</span>
+<span class="hljs-comment">//         )</span>
+<span class="hljs-comment">//       )</span>
+<span class="hljs-comment">//     )</span>
+<span class="hljs-comment">//   )</span>
+<span class="hljs-comment">// )</span>
+</code></pre>
+<p>Documents can be pretty-printed by using the <code>format</code> method that requires a <code>Writer</code> as a parameter:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> java.io._
+
+<span class="hljs-keyword">val</span> writer = <span class="hljs-keyword">new</span> <span class="hljs-type">StringWriter</span>()
+<span class="hljs-comment">// writer: StringWriter = A C  B</span>
+</code></pre>
+<p>The result of pretty printing to the writer can be seen by running:</p>
+<pre><code class="hljs css language-scala">myDoc.format(<span class="hljs-number">20</span>, writer)
+
+writer.toString
+<span class="hljs-comment">// res1: String = "A C  B  "</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#further-info">Further info</a></li><li><a href="#example-usage">Example usage</a></li></ul></nav></div><footer class="nav-footer" id="footer"><hr class="separator"/><section class="copyright">Copyright © 2019-2021 WESO Research group.</section></footer></div></body></html>
