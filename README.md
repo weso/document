@@ -12,7 +12,6 @@ You can see the [web page](https://weso.github.io/document) for technical docume
 
 [![Continuous Integration](https://github.com/weso/document/actions/workflows/ci.yml/badge.svg)](https://github.com/weso/document/actions/workflows/ci.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/es.weso/document_3/badge.svg)](https://maven-badges.herokuapp.com/maven-central/es.weso/document_3)
-
 [![codecov](https://codecov.io/gh/weso/document/branch/master/graph/badge.svg)](https://codecov.io/gh/weso/document)
 
 
