@@ -1,4 +1,4 @@
-# document 
+# document
 
 This project contains code that was developed as part of the Scala standard library but was later deprecated. 
 We maintain the code mainly because we used it in one of our projects and also as a small and simple test module that we can use to check continuous integration, documentation, cross-scala compilations, tests, and so on.
