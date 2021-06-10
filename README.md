@@ -11,6 +11,7 @@ It consists os a basic pretty-printing library,
 You can see the [web page](https://weso.github.io/document) for technical documentation.
 
 [![Continuous Integration](https://github.com/weso/document/actions/workflows/ci.yml/badge.svg)](https://github.com/weso/document/actions/workflows/ci.yml)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/es.weso/document_3/badge.svg)](https://maven-badges.herokuapp.com/maven-central/es.weso/document_3)
 [![codecov](https://codecov.io/gh/weso/document/branch/master/graph/badge.svg)](https://codecov.io/gh/weso/document)
 
 
@@ -23,3 +24,17 @@ You can see the [web page](https://weso.github.io/document) for technical docume
 
 Contributions are greatly appreciated.
 Please fork this repository and open a pull request to add more features or [submit issues](https://github.com/weso/document/issues)
+
+## Publishing to OSS-Sonatype
+
+This project uses [the sbt ci release](https://github.com/olafurpg/sbt-ci-release) plugin for publishing to [OSS Sonatype](https://oss.sonatype.org/).
+
+##### SNAPSHOT Releases
+Open a PR and merge it to watch the CI release a -SNAPSHOT version
+
+##### Full Library Releases
+1. Push a tag and watch the CI do a regular release
+2. `git tag -a v0.1.0 -m "v0.1.0"`
+3. `git push origin v0.1.0`
+_Note that the tag version MUST start with v._
+
