@@ -1,4 +1,4 @@
-lazy val scala212 = "2.12.13"
+lazy val scala212 = "2.12.14"
 lazy val scala213 = "2.13.5"
 lazy val scalaJs  = "0.6.31"
 lazy val scala3   = "3.0.0-RC2"
