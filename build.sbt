@@ -53,7 +53,7 @@ ThisBuild / versionScheme := Some("early-semver")
 
 // Dependencies
 
-lazy val munitVersion = "0.7.26"
+lazy val munitVersion = "0.7.28"
 
 lazy val munit        = "org.scalameta" %% "munit" % munitVersion % Test
 
