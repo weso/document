@@ -9,9 +9,10 @@ lazy val supportedScalaVersions = List(
   scala3
 )
 
+val Java8 = "adopt@1.8"
 val Java11 = "adopt@1.11"
 
-ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
+ThisBuild / githubWorkflowJavaVersions := Seq(Java8)
 
 ThisBuild / crossScalaVersions := supportedScalaVersions
 // ThisBuild / scalaVersion := crossScalaVersions.value.last
