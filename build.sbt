@@ -1,7 +1,7 @@
-lazy val scala212 = "2.12.14"
-lazy val scala213 = "2.13.6"
+lazy val scala212 = "2.12.15"
+lazy val scala213 = "2.13.7"
 lazy val scalaJs  = "0.6.31"
-lazy val scala3   = "3.0.0"
+lazy val scala3   = "3.1.0"
 
 lazy val supportedScalaVersions = List(
   scala212,
@@ -54,7 +54,7 @@ ThisBuild / versionScheme := Some("early-semver")
 
 // Dependencies
 
-lazy val munitVersion = "0.7.26"
+lazy val munitVersion = "0.7.27"
 
 lazy val munit        = "org.scalameta" %% "munit" % munitVersion % Test
 
